@@ -198,11 +198,35 @@
 
 // export default App;
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+	validateEmail,
+	validateFullName,
+	validateMessage,
+	validatePhone,
+} from "./components/Validation";
+import InlineError from "./components/InlineError";
 const InputClass =
 	"w-full py-4 placeholder:text-gray px-6 text-main border-2 mt-2 border-border rounded-md";
 
 const App = () => {
+	const [fullName, setFullName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState();
+	const [message, setMessage] = useState("");
+	const [fullNameError, setFullNameError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [phoneError, setPhoneError] = useState();
+	const [messageError, setMessageError] = useState("");
+
+	useEffect(() => {
+		// ************VALIDATION **************
+		validateFullName({ fullName, setFullNameError });
+		validateEmail({ email, setEmailError });
+		validatePhone({ phone, setPhoneError });
+		validateMessage({ message, setMessageError });
+	}, [fullName, email, phone, message]);
+	console.log("fullNameError ", fullNameError);
 	return (
 		<div className="container flex-colo py-12 mx-auto min-h-screen sm:py-2 px-4">
 			<div className="main-box lg:w-3/4 w-full flex box-shadow rounded-lg overflow-hidden">
@@ -226,21 +250,27 @@ const App = () => {
 					<div className="my-6">
 						<label>FullName</label>
 						<input
+							value={fullName}
+							onChange={(e) => setFullName(e.target.value)}
 							required
 							type="text"
 							placeholder="User Doe"
 							className={InputClass}
 						/>
+						{fullNameError && <InlineError error={fullNameError} />}
 					</div>
 					{/* Email */}
 					<div className="my-6">
 						<label>Email</label>
 						<input
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							required
 							type="email"
 							placeholder="example@gmail.com"
 							className={InputClass}
 						/>
+						{emailError && <InlineError error={emailError} />}
 					</div>
 					{/* Phone */}
 					<div className="my-6">
@@ -255,22 +285,28 @@ const App = () => {
 								+255
 							</div>
 							<input
+								value={phone}
+								onChange={(e) => setPhone(e.target.value)}
 								required
 								type="number"
 								placeholder="09123456677"
 								className="placeholder:text-gray text-main col-span-7 px-3"
 							/>
 						</div>
+						{phoneError && <InlineError error={phoneError} />}
 					</div>
 					{/* Message */}
 					<div className="my-6">
 						<label>Message</label>
 						<textarea
+							value={message}
+							onChange={(e) => setMessage(e.target.value)}
 							required
 							placeholder="How can help you"
 							rows={3}
 							className="mt-2 w-full border-2 border-border py-4 placeholder:text-gray px-6 text-main rounded-md"
 						/>
+						{messageError && <InlineError error={messageError} />}
 					</div>
 					{/* Submit */}
 					<button
