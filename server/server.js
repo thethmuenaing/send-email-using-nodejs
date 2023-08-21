@@ -21,6 +21,7 @@ app.post("/send", async (req, res) => {
 	}
 });
 
+console.log("process user ", process.env.SEND_TO);
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });

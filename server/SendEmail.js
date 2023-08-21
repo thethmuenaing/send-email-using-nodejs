@@ -2,12 +2,20 @@ import nodemailer from "nodemailer";
 
 const Email = (options) => {
 	let transpoter = nodemailer.createTransport({
-		service: "hotmail", // i use outlook
+		host: "smtp.gmail.com",
+		port: 465,
+		secure: true, // use SSL
 		auth: {
-			user: process.env.USER, // user or email
-			pass: process.env.PASSWORD, //password
+			// user: "thethmuenaing22112002@gmail.com",
+			// pass: "ynrddxjzbbmiplrh",
+			user: process.env.USERNAME,
+			pass: process.env.PASSWORD,
 		},
 	});
+
+	console.log("process ", process.env.USERNAME);
+	console.log("process ", process.env.PASSWORD);
+	// nodemailer
 	transpoter.sendMail(options, (err, info) => {
 		if (err) {
 			console.log(err);
@@ -20,8 +28,9 @@ const Email = (options) => {
 
 const EmailSender = ({ fullName, email, phone, message }) => {
 	const options = {
-		from: `shoeShop 🛍️ <${process.env.USER}>`,
-		to: process.env.SEMD_TO,
+		from: `shoeShop 🛍️ <${process.env.USERNAME}>`,
+		// to: "thethmuenaing.dev@gmail.com",
+		to: process.env.SEND_TO,
 		subject: "Message from ShoeShop Store",
 		html: `
 		<div style="width: 100%; background-color: #f3f9ff; padding: 5rem 0">
