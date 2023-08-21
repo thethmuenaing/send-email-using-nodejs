@@ -229,11 +229,10 @@ const App = () => {
 	let result = countries && Object.keys(countries).map((key) => countries[key]);
 	// console.log("result ", result);
 	let output = result && result.find((x) => x.country_name === country);
-	console.log("output ", output);
+	// console.log("output ", output);
 	let outputResult = output && output.dialling_code;
-	console.log("outputResult ", outputResult);
+	// console.log("outputResult ", outputResult);
 	let phoneFull = outputResult && outputResult.concat(phone);
-
 	console.log("phoneFull ", phoneFull);
 
 	useEffect(() => {
@@ -247,9 +246,6 @@ const App = () => {
 		validatePhone({ phone, setPhoneError });
 		validateMessage({ message, setMessageError });
 	}, [fullName, email, phone, message, ipData, countries]);
-
-	// console.log(ipData);
-	// console.log(countries);
 	return (
 		<div className="container flex-colo py-12 mx-auto min-h-screen sm:py-2 px-4">
 			{loading ? (
