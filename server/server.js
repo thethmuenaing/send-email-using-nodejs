@@ -20,8 +20,6 @@ app.post("/send", async (req, res) => {
 		res.status(404).json({ msg: "Error ❌" });
 	}
 });
-
-console.log("process user ", process.env.SEND_TO);
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });

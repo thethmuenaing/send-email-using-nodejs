@@ -6,15 +6,10 @@ const Email = (options) => {
 		port: 465,
 		secure: true, // use SSL
 		auth: {
-			// user: "thethmuenaing22112002@gmail.com",
-			// pass: "ynrddxjzbbmiplrh",
 			user: process.env.USERNAME,
 			pass: process.env.PASSWORD,
 		},
 	});
-
-	console.log("process ", process.env.USERNAME);
-	console.log("process ", process.env.PASSWORD);
 	// nodemailer
 	transpoter.sendMail(options, (err, info) => {
 		if (err) {
@@ -29,7 +24,6 @@ const Email = (options) => {
 const EmailSender = ({ fullName, email, phone, message }) => {
 	const options = {
 		from: `shoeShop 🛍️ <${process.env.USERNAME}>`,
-		// to: "thethmuenaing.dev@gmail.com",
 		to: process.env.SEND_TO,
 		subject: "Message from ShoeShop Store",
 		html: `
